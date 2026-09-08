@@ -267,6 +267,20 @@ body {
     twinkle var(--td, 9s) ease-in-out infinite;
   animation-delay: var(--delay, 0s);
 }
+.memory-orbit {
+  animation: memory-orbit 8s linear infinite;
+  transform: rotateX(68deg) rotateZ(0deg);
+  box-shadow: 0 0 30px rgba(247, 200, 115, 0.18);
+}
+.memory-orbit-delayed {
+  animation-duration: 11s;
+  animation-direction: reverse;
+  opacity: 0.7;
+}
+@keyframes memory-orbit {
+  to { transform: rotateX(68deg) rotateZ(360deg); }
+}
+.memory-glyph { text-shadow: 0 0 24px rgba(255, 77, 109, 0.75), 0 10px 24px rgba(0, 0, 0, 0.4); }
 .star {
   border-radius: 999px;
   background: #fff7e6;

@@ -1,51 +1,14 @@
-// One node per year. Replace the [placeholders] with your real captions,
-// and drop photos into /public/images (photo1.jpg … photo5.jpg).
 import type { Bi } from "@/lib/language";
 
 const bi = (en: string, ur: string): Bi => ({ en, ur });
 
-export type Memory = {
-  year: string;
-  title: Bi;
-  caption: Bi;
-  photo: string;
-  alt: string;
-};
+export type Memory = { year: string; title: Bi; caption: Bi; symbol: string; tone: string };
 
+// Animated memory moments: intentionally no photos or placeholder images.
 export const memories: Memory[] = [
-  {
-    year: "2022",
-    title: bi("The beginning ❤️", "شروعات ❤️"),
-    caption: bi("[Our first memory]", "[ہماری پہلی یاد]"),
-    photo: "/images/photo1.jpg",
-    alt: "Us, in 2022 – where it all began",
-  },
-  {
-    year: "2023",
-    title: bi("Getting closer", "قریب آتے ہوئے"),
-    caption: bi("[Our favorite place]", "[ہماری پسندیدہ جگہ]"),
-    photo: "/images/photo2.jpg",
-    alt: "Us, in 2023 – at our favorite place",
-  },
-  {
-    year: "2024",
-    title: bi("More memories", "اور یادیں"),
-    caption: bi("[Our funniest moment]", "[ہمارا سب سے مزے دار لمحہ]"),
-    photo: "/images/photo3.jpg",
-    alt: "Us, in 2024 – laughing about something silly",
-  },
-  {
-    year: "2025",
-    title: bi("More reasons to love you", "تم سے محبت کی اور وجوہات"),
-    caption: bi("[Our most emotional moment]", "[ہمارا سب سے جذباتی لمحہ]"),
-    photo: "/images/photo4.jpg",
-    alt: "Us, in 2025 – a moment that meant a lot",
-  },
-  {
-    year: "2026",
-    title: bi("Four years... and still you.", "چار سال... اور آج بھی تم۔"),
-    caption: bi("[Our favorite conversation]", "[ہماری پسندیدہ گفتگو]"),
-    photo: "/images/photo5.jpg",
-    alt: "Us, in 2026 – four years in",
-  },
+  { year: "2022", title: bi("The beginning ❤️", "وہ خوبصورت آغاز ❤️"), caption: bi("The day two hearts quietly found each other.", "وہ دن جب دو دلوں نے خاموشی سے ایک دوسرے کو پا لیا۔"), symbol: "✦", tone: "from-rose/30 via-crimson/40 to-maroon-deep" },
+  { year: "2023", title: bi("Getting closer", "محبت اور گہری ہوتی گئی"), caption: bi("Every conversation made my world feel more like home.", "ہر گفتگو نے میری دنیا کو تمہارے ساتھ گھر جیسا بنا دیا۔"), symbol: "♡", tone: "from-blush/30 via-rose/30 to-crimson/40" },
+  { year: "2024", title: bi("More laughter", "ہنسی کے اور بھی لمحے"), caption: bi("With you, even ordinary days learned how to sparkle.", "تمہارے ساتھ عام دنوں نے بھی جگمگانا سیکھ لیا۔"), symbol: "❀", tone: "from-gold/30 via-rose/30 to-maroon-mid" },
+  { year: "2025", title: bi("More reasons to love you", "تم سے محبت کی اور بھی وجوہات"), caption: bi("Your kindness became one of the safest places in my life.", "تمہاری محبت اور مہربانی میری زندگی کی محفوظ ترین پناہ بن گئی۔"), symbol: "∞", tone: "from-crimson/40 via-rose/30 to-night" },
+  { year: "2026", title: bi("Four years… and still you", "چار سال… اور آج بھی تم"), caption: bi("The 5th year has begun; my prayer is that it leads us to Nikah.", "پانچواں سال شروع ہو گیا ہے؛ میری دعا ہے کہ یہ ہمیں نکاح تک لے جائے۔"), symbol: "♥", tone: "from-gold/40 via-rose/40 to-crimson/50" },
 ];

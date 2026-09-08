@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useState } from "react";
 import { anniversaryConfig } from "@/data/anniversaryConfig";
 import { nikah } from "@/data/loveMessages";
 import { promises, witnessLine } from "@/data/spiritual";
@@ -24,7 +23,6 @@ const fade = (delay: number) => ({
 export default function NikahEnding() {
   const { go } = useNav();
   const { resolve } = useLang();
-  const [photoFailed, setPhotoFailed] = useState(false);
   const urdu = resolve("ur") === "ur";
 
   return (
@@ -57,14 +55,14 @@ export default function NikahEnding() {
     >
       <div className="flex flex-col items-center gap-5 pt-[12vmin]">
         <motion.div {...fade(0.4)} className="relative w-[min(62vw,260px)]">
-          {photoFailed ? (
+          <motion.div
+            className="rounded-[2rem] border border-gold/25 bg-white/[0.04] p-5 shadow-[0_30px_70px_-30px_rgba(0,0,0,0.9)]"
+            animate={{ rotateY: [0, 4, 0, -4, 0], y: [0, -7, 0] }}
+            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+            style={{ perspective: 900 }}
+          >
             <HandsHeld id="held-nikah" className="w-full opacity-95" />
-          ) : (
-            <div className="photo-grade relative overflow-hidden rounded-[2rem] shadow-[0_30px_70px_-30px_rgba(0,0,0,0.9)]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/images/hands/nikah-henna.jpg" alt="Her henna-covered hand resting on his, ring on her finger" className="aspect-[4/3] w-full object-cover" style={{ filter: "sepia(0.7) saturate(1.2) brightness(0.9)" }} onError={() => setPhotoFailed(true)} />
-            </div>
-          )}
+          </motion.div>
           <div className="pointer-events-none absolute -bottom-9 left-1/2 -translate-x-1/2 opacity-90">
             <ParticleHeart size="small" density="low" intensity="calm" opacity={0.85} />
           </div>

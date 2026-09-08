@@ -5,8 +5,8 @@ import { useEffect, useState } from "react";
 import { qabool } from "@/data/loveMessages";
 import { useLang, useLines } from "@/lib/language";
 import { useNav } from "@/lib/nav";
-import HandPhotos, { type HandStage } from "./HandPhotos";
 import { HandsHeld, Rose } from "./HandsIllustration";
+import RingAnimation from "./RingAnimation";
 import RosePetals from "./RosePetals";
 import Sparkles from "./Sparkles";
 import LineSequence from "./ui/LineSequence";
@@ -34,7 +34,6 @@ export default function QaboolExperience() {
   const stepIndex = stage === "qabool1" ? 1 : stage === "qabool2" ? 2 : stage === "qabool3" ? 3 : 4;
   const [phase, setPhase] = useState<"lines" | "ask" | "after">("lines");
   const [seq, setSeq] = useState<Seq>("idle");
-  const [photosFailed, setPhotosFailed] = useState(false);
 
   const seqAt = (s: Seq) => SEQ_ORDER.indexOf(seq) >= SEQ_ORDER.indexOf(s);
 
@@ -68,7 +67,6 @@ export default function QaboolExperience() {
   }));
   const afterLines = lines(data.after, "ur", () => ({ hold: 2200, className: "text-3xl sm:text-4xl text-gold" }));
 
-  const handStage: HandStage = stage === "ringAnimation" ? (seqAt("held") ? "held" : "inserting") : stepIndex === 1 ? "a" : "b";
   const intensity = stage === "ringAnimation" ? 3 : stepIndex - 1; // 0..3 for ambient density
   const settled = seqAt("held");
 
@@ -126,13 +124,24 @@ export default function QaboolExperience() {
         animate={{ scale: reduce ? 1 : 1 + intensity * 0.02 }}
         transition={{ duration: 1.8, ease: "easeInOut" }}
       >
-        {photosFailed ? (
-          <div className="rounded-[2rem] border border-gold/20 bg-white/[0.03] p-6" aria-hidden>
-            <HandsHeld id="fallback" ring={settled || stepIndex >= 3} />
-          </div>
-        ) : (
-          <HandPhotos stage={handStage} glint settled={settled} onError={() => setPhotosFailed(true)} className="shadow-[0_40px_90px_-40px_rgba(0,0,0,0.9)]" />
-        )}
+        <motion.div
+          className="rounded-[2rem] border border-gold/20 bg-white/[0.03] p-6 shadow-[0_40px_90px_-40px_rgba(0,0,0,0.9)]"
+          animate={reduce ? undefined : { rotateY: [0, 3, 0, -3, 0], y: [0, -6, 0] }}
+          transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+          style={{ perspective: 900 }}
+        >
+          <HandsHeld id="qabool-hands" ring={settled || stepIndex >= 3} />
+          {stage === "ringAnimation" && !settled && (
+            <motion.div
+              className="pointer-events-none absolute left-[52%] top-[8%] z-20"
+              initial={{ x: -90, y: -30, scale: 0.55, opacity: 0 }}
+              animate={{ x: 0, y: 112, scale: 0.42, opacity: [0, 1, 1, 0] }}
+              transition={{ duration: 2.8, ease: "easeInOut" }}
+            >
+              <RingAnimation size={100} glow={1.6} float={false} />
+            </motion.div>
+          )}
+        </motion.div>
 
         {/* roses bloom around the hands */}
         {seqAt("roses") &&

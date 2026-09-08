@@ -49,8 +49,9 @@ export const HandSvg = forwardRef<SVGSVGElement, HandProps>(function HandSvg({ m
     <svg ref={ref} viewBox={HAND_VIEWBOX} className={className} aria-hidden>
       <defs>
         <linearGradient id={`${id}-fill`} x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="#4d0f25" stopOpacity="0.96" />
-          <stop offset="1" stopColor="#22091a" stopOpacity="0.98" />
+          <stop offset="0" stopColor="#fffaf8" stopOpacity="0.98" />
+          <stop offset="0.52" stopColor="#f6d8d5" stopOpacity="0.98" />
+          <stop offset="1" stopColor="#c9898d" stopOpacity="0.98" />
         </linearGradient>
       </defs>
       <g transform={mirror ? "translate(200 0) scale(-1 1)" : undefined}>

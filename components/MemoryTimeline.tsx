@@ -5,7 +5,6 @@ import { memories } from "@/data/memories";
 import { timeline, ui } from "@/data/loveMessages";
 import { L, useLang } from "@/lib/language";
 import { useNav } from "@/lib/nav";
-import PhotoGallery, { Photo } from "./PhotoGallery";
 import Sparkles from "./Sparkles";
 import StageButton from "./ui/StageButton";
 import StageWrap from "./ui/StageWrap";
@@ -41,7 +40,18 @@ export default function MemoryTimeline() {
                 <span className="h-2 w-2 rounded-full bg-gold" />
               </span>
               <article className="overflow-hidden rounded-3xl border border-gold/20 bg-white/[0.04] text-left">
-                <Photo src={m.photo} alt={m.alt} className="aspect-[4/3] w-full" label={m.photo.split("/").pop()} />
+                <div className={`relative flex aspect-[4/3] items-center justify-center overflow-hidden bg-gradient-to-br ${m.tone}`}>
+                  <motion.span
+                    className="memory-glyph relative z-10 font-serif text-7xl text-blush/90"
+                    animate={reduce ? undefined : { y: [0, -10, 0], rotate: [-5, 5, -5], scale: [1, 1.08, 1] }}
+                    transition={{ duration: 4 + i * 0.4, repeat: Infinity, ease: "easeInOut" }}
+                  >
+                    {m.symbol}
+                  </motion.span>
+                  <span className="memory-orbit absolute h-28 w-28 rounded-full border border-gold/40" />
+                  <span className="memory-orbit memory-orbit-delayed absolute h-40 w-40 rounded-full border border-blush/20" />
+                  <span className="absolute inset-0 bg-[radial-gradient(circle_at_50%_45%,rgba(255,255,255,0.24),transparent_32%,rgba(12,3,10,0.28)_75%)]" />
+                </div>
                 <div className="p-4">
                   <div className="text-xs tracking-[0.35em] text-gold">{m.year}</div>
                   <L t={m.title} as="h3" className="display mt-1 text-xl font-semibold text-warmwhite" urduClassName="text-right" />
@@ -53,10 +63,6 @@ export default function MemoryTimeline() {
         </ol>
         <L t={ui.swipe} as="p" className="mt-1 text-xs tracking-widest text-blush/50 sm:hidden" />
       </div>
-
-      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1, delay: 2.4 }} className="mt-10">
-        <PhotoGallery />
-      </motion.div>
 
       <div className="mt-10 pb-6">
         <StageButton onClick={() => go("loveQuestion")} delay={3} urdu={button.urdu}>

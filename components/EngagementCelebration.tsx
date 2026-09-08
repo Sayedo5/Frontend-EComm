@@ -6,7 +6,6 @@ import { celebration } from "@/data/loveMessages";
 import { useLang, useLines } from "@/lib/language";
 import { useNav } from "@/lib/nav";
 import FloatingHearts from "./FloatingHearts";
-import HandPhotos from "./HandPhotos";
 import { HandsHeld } from "./HandsIllustration";
 import ParticleHeart from "./ParticleHeart";
 import RosePetals from "./RosePetals";
@@ -22,7 +21,6 @@ export default function EngagementCelebration() {
   const lines = useLines();
   const [done, setDone] = useState(false);
   const [burst, setBurst] = useState(true);
-  const [photoFailed, setPhotoFailed] = useState(false);
 
   useEffect(() => {
     const tm = setTimeout(() => setBurst(false), 3800);
@@ -63,11 +61,14 @@ export default function EngagementCelebration() {
     >
       <div className="flex flex-col items-center gap-6">
         <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1.6 }} className="relative w-[min(78vw,340px)]">
-          {photoFailed ? (
+          <motion.div
+            className="rounded-[2rem] border border-gold/25 bg-white/[0.04] p-5 shadow-[0_40px_90px_-40px_rgba(0,0,0,0.9)]"
+            animate={{ rotateY: [0, 4, 0, -4, 0], y: [0, -8, 0] }}
+            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+            style={{ perspective: 900 }}
+          >
             <HandsHeld id="held-celebrate" className="w-full" />
-          ) : (
-            <HandPhotos stage="held" glint settled aspect="4 / 4.6" onError={() => setPhotoFailed(true)} className="shadow-[0_40px_90px_-40px_rgba(0,0,0,0.9)]" />
-          )}
+          </motion.div>
           <div className="pointer-events-none absolute -bottom-10 left-1/2 -translate-x-1/2">
             <ParticleHeart size="small" density="low" intensity={burst ? "burst" : "normal"} opacity={0.9} />
           </div>

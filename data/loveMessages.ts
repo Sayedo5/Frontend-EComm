@@ -6,17 +6,17 @@ import type { Bi } from "@/lib/language";
 const bi = (en: string, ur: string): Bi => ({ en, ur });
 
 export const ui = {
-  langToggle: { ur: "اردو", bi: "Both", en: "English" },
+  langToggle: { ur: "Urdu", bi: "Both", en: "English" },
   soundHint: bi("sound on, please 🎧", "آواز آن کر لو، پلیز 🎧"),
   swipe: bi("← swipe →", "← سوائپ کرو →"),
 };
 
 export const hero = {
   lines: [
-    bi("09 September 2022", "۰۹ ستمبر ۲۰۲۲"),
+    bi("09 September 2022", "09 ستمبر 2022"),
     bi("Four years ago...", "چار سال پہلے..."),
     bi("Something beautiful began.", "کچھ خوبصورت شروع ہوا۔"),
-    bi("09 September 2026", "۰۹ ستمبر ۲۰۲۶"),
+    bi("09 September 2026", "09 ستمبر 2026"),
     bi("Happy 4th Anniversary, My Love ❤️", "چوتھی سالگرہ مبارک ہو، میری جان ❤️"),
   ],
   subtitle: bi(
@@ -85,7 +85,7 @@ export const youAre = {
 export const timeline = {
   heading: bi("Four years, one line", "چار سال، ایک لکیر"),
   sub: bi("Every year, one more reason.", "ہر سال، ایک اور وجہ۔"),
-  gallery: bi("A few of my favourite pictures of us", "ہماری کچھ پسندیدہ تصویریں"),
+  gallery: bi("A few little symbols from our story", "ہماری کہانی کے چند خوبصورت نشان"),
   button: bi("Okay. One question. ❤️", "اچھا۔ ایک سوال۔ ❤️"),
 };
 
@@ -199,10 +199,10 @@ export const proposal = {
     bi("I don't just want four more years.", "میں صرف چار اور سال نہیں چاہتا۔"),
     bi("I want a lifetime.", "میں پوری زندگی چاہتا ہوں۔"),
   ],
-  question: bi("Will you marry me?", "کیا تم مجھ سے شادی کرو گی؟"),
+  question: bi("Will you make me the luckiest man and say yes to our Nikah?", "کیا تم مجھے دنیا کا سب سے خوش نصیب انسان بنا کر میرے ساتھ نکاح کے لیے ہاں کہو گی؟"),
   sub: bi(
-    "Will you come fully into my life... and let me spend the rest of it loving you?",
-    "کیا تم پوری طرح میری زندگی میں آؤ گی... اور مجھے باقی ساری زندگی تم سے محبت کرنے دو گی؟",
+    "I do not want only a beautiful promise; I want a halal life with you, built with love, respect, and Allah's blessing.",
+    "میں صرف ایک خوبصورت وعدہ نہیں چاہتا؛ میں تمہارے ساتھ محبت، عزت اور اللہ کی برکت سے ایک حلال زندگی بنانا چاہتا ہوں۔",
   ),
   yes: bi("YES ❤️", "ہاں ❤️"),
   think: bi("LET ME THINK 🥺", "مجھے سوچنے دو 🥺"),
@@ -211,7 +211,7 @@ export const proposal = {
     bi("I don't want your answer because of a website. I want it because your heart says it.", "میں تمہارا جواب کسی ویب سائٹ کی وجہ سے نہیں چاہتا۔ میں چاہتا ہوں کہ تمہارا دل کہے۔"),
     bi("But whenever you're ready... my heart will still be here. ❤️", "لیکن جب بھی تم تیار ہو... میرا دل یہیں ہوگا۔ ❤️"),
   ],
-  ready: bi("When I'm Ready ❤️", "جب میں تیار ہوں گی ❤️"),
+  ready: bi("I am ready to say yes ❤️", "میں ہاں کہنے کے لیے تیار ہوں ❤️"),
 };
 
 export const qabool = {
@@ -242,28 +242,28 @@ export const celebration = {
 };
 
 export const nikah = {
-  urdu1: bi("May our Nikah be accepted ❤️", "نکاح قبول ہو ❤️"),
-  urdu2: bi("and may we both be kept safe.", "اور ہم دونوں سلامت ہوں"),
+  urdu1: bi("May Allah bring our Nikah close ❤️", "اللہ ہمارے نکاح کا وقت جلد لائے ❤️"),
+  urdu2: bi("and keep our love sincere and protected.", "اور ہماری محبت کو خلوص اور حفاظت عطا فرمائے۔"),
   dua: bi(
     "May Allah keep our hearts together, fill our lives with peace, protect our love, and keep us beside each other through every chapter of life.",
     "اللہ ہمارے دلوں کو جوڑے رکھے، ہماری زندگیوں کو سکون سے بھر دے، ہماری محبت کی حفاظت کرے، اور زندگی کے ہر موڑ پر ہمیں ایک دوسرے کے ساتھ رکھے۔",
   ),
   ameen: bi("Ameen ❤️", "آمین ❤️"),
-  english: bi("Happy 4th Anniversary, My Love.", "چوتھی سالگرہ مبارک ہو، میری جان۔"),
-  urdu3: bi("Four years complete...", "چار سال مکمل..."),
-  urdu4: bi("and, inshaAllah, a whole lifetime still to come. ❤️", "اور ان شاء اللہ پوری زندگی باقی۔ ❤️"),
+  english: bi("Our 5th year has begun, my love.", "میری جان، ہماری محبت کا پانچواں سال شروع ہو گیا ہے۔"),
+  urdu3: bi("Four beautiful years are complete…", "محبت کے چار خوبصورت سال مکمل ہو گئے…"),
+  urdu4: bi("and I pray that before our 5th love anniversary, we are together in Nikah. ❤️", "اور میری دعا ہے کہ ہماری پانچویں محبت کی سالگرہ سے پہلے ہم نکاح کے بندھن میں بندھے ہوں۔ ❤️"),
   button: "❤️",
 };
 
 export const finalMessage = {
-  lines: [bi("Four years down...", "چار سال پورے..."), bi("Forever to go.", "اور ہمیشہ باقی۔")],
+  lines: [bi("Four beautiful years behind us...", "محبت کے چار خوبصورت سال ہمارے پیچھے ہیں…"), bi("The 5th year of our love has begun.", "ہماری محبت کا پانچواں سال شروع ہو گیا ہے۔")],
   urdu: [
     bi("I love you.", "میں تم سے محبت کرتا ہوں۔"),
     bi("I am in love with you.", "تم سے عشق ہے۔"),
     bi("You are my prayer.", "تم میری دعا ہو۔"),
     bi("You are my happiness.", "تم میری خوشی ہو۔"),
-    bi("And if life gave me the chance to begin again...", "اور اگر زندگی دوبارہ شروع کرنے کا موقع ملے..."),
-    bi("I would choose you, and only you, again.", "تو میں پھر تمہیں ہی چنوں گا۔"),
+    bi("Before our 5th love anniversary, I pray we stand together in Nikah.", "میری دعا ہے کہ ہماری پانچویں محبت کی سالگرہ سے پہلے ہم نکاح کے بندھن میں بندھے ہوں۔"),
+    bi("I choose you today, tomorrow, and in every prayer after this.", "میں آج، کل، اور اس کے بعد ہر دعا میں تمہیں ہی چنتا ہوں۔"),
   ],
   finale: bi("Forever yours. ❤️", "ہمیشہ تمہارا۔ ❤️"),
   replay: bi("Read it again from the start", "شروع سے دوبارہ پڑھو"),
