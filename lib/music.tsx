@@ -25,10 +25,26 @@ export function MusicProvider({ children }: { children: React.ReactNode }) {
   const [playing, setPlaying] = useState(false);
   const [track, setTrack] = useState<TrackId>(currentTrack.current);
 
+  const playAudio = useCallback(() => {
+    const audio = song.current;
+    if (!audio) return;
+    const start = () => audio.play().catch(() => setPlaying(false));
+    if (audio.readyState >= HTMLMediaElement.HAVE_FUTURE_DATA) {
+      start();
+      return;
+    }
+    const onCanPlay = () => {
+      audio.removeEventListener("canplay", onCanPlay);
+      start();
+    };
+    audio.addEventListener("canplay", onCanPlay, { once: true });
+    audio.load();
+  }, []);
+
   const setTrackSource = useCallback((next: TrackId, autoplay: boolean) => {
     const audio = song.current;
     if (!audio || currentTrack.current === next && audio.src.endsWith(anniversaryConfig.musicTracks[next])) {
-      if (autoplay) audio?.play().catch(() => setPlaying(false));
+      if (autoplay) playAudio();
       return;
     }
     currentTrack.current = next;
@@ -37,8 +53,8 @@ export function MusicProvider({ children }: { children: React.ReactNode }) {
     audio.src = anniversaryConfig.musicTracks[next];
     audio.currentTime = 0;
     audio.load();
-    if (autoplay) audio.play().catch(() => setPlaying(false));
-  }, []);
+    if (autoplay) playAudio();
+  }, [playAudio]);
 
   useEffect(() => {
     const s = new Audio();
@@ -74,8 +90,8 @@ export function MusicProvider({ children }: { children: React.ReactNode }) {
   }, [stage, playing, setTrackSource]);
 
   const play = useCallback(() => {
-    song.current?.play().catch(() => setPlaying(false));
-  }, []);
+    playAudio();
+  }, [playAudio]);
   const pause = useCallback(() => song.current?.pause(), []);
   const toggle = useCallback(() => (song.current?.paused ? play() : pause()), [play, pause]);
 

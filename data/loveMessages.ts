@@ -270,7 +270,7 @@ export const finalMessage = {
 };
 
 export const music = {
-  play: bi("Play our song 🎵", "ہمارا گانا چلاؤ 🎵"),
-  pause: bi("Pause our song", "گانا روکو"),
+  play: bi("Play", "چلائیں"),
+  pause: bi("Pause", "روکیں"),
   intro: bi("Open My Heart 💌", "میرا دل کھولو 💌"),
 };

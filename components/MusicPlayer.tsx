@@ -43,7 +43,7 @@ export default function MusicPlayer() {
           <span className="hidden sm:inline" lang="en" dir="ltr">
             {label.text} · {trackLabel}
           </span>
-          <span className="sm:hidden">{playing ? "Pause" : "Play"}</span>
+          <span className="sm:hidden">{label.text} · {trackLabel}</span>
         </motion.button>
       )}
     </AnimatePresence>
