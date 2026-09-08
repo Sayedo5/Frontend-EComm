@@ -131,14 +131,14 @@ export default function QaboolExperience() {
           style={{ perspective: 900 }}
         >
           <HandsHeld id="qabool-hands" ring={settled || stepIndex >= 3} />
-          {stage === "ringAnimation" && !settled && (
+          {stage === "ringAnimation" && (
             <motion.div
               className="pointer-events-none absolute left-[52%] top-[8%] z-20"
               initial={{ x: -90, y: -30, scale: 0.55, opacity: 0 }}
-              animate={{ x: 0, y: 112, scale: 0.42, opacity: [0, 1, 1, 0] }}
-              transition={{ duration: 2.8, ease: "easeInOut" }}
+              animate={settled ? { x: 0, y: 112, scale: [0.42, 0.48, 0.42], opacity: [0.55, 1, 0.55], rotate: [-3, 3, -3] } : { x: 0, y: 112, scale: 0.42, opacity: [0, 1, 1, 0] }}
+              transition={settled ? { duration: 2.8, repeat: Infinity, ease: "easeInOut" } : { duration: 2.8, ease: "easeInOut" }}
             >
-              <RingAnimation size={100} glow={1.6} float={false} />
+              <RingAnimation size={100} glow={settled ? 2 : 1.6} float={false} />
             </motion.div>
           )}
         </motion.div>

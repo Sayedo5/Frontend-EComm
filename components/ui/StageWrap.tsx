@@ -29,12 +29,12 @@ export default function StageWrap({ children, mood, paintOwnBackground = false, 
   const reduce = useReducedMotion();
   return (
     <motion.section
-      className={`stage ${className}`}
+      className={`stage stage-smooth ${className}`}
       style={{ background: paintOwnBackground && mood ? moods[mood] : "transparent", ...style }}
       initial={reduce ? { opacity: 0 } : { opacity: 0, y: 28, scale: 0.985, filter: "blur(6px)" }}
       animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
       exit={reduce ? { opacity: 0, transition: { duration: 0.2 } } : { opacity: 0, y: -22, scale: 0.99, filter: "blur(5px)", transition: { duration: 0.55, ease: "easeInOut" } }}
-      transition={{ duration: reduce ? 0.2 : 1.1, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: reduce ? 0.2 : 1.25, ease: [0.16, 1, 0.3, 1] }}
     >
       {ambient}
       <div className={`stage-content ${contentClassName}`} dir={dir} lang={lang}>

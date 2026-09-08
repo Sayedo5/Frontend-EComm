@@ -126,6 +126,8 @@ body {
   padding: calc(4.25rem + var(--sat)) 1.25rem calc(2rem + var(--sab));
   overflow: hidden;
   isolation: isolate;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
 }
 .stage-content {
   position: relative;
@@ -134,6 +136,7 @@ body {
   max-width: 40rem;
   margin: 0 auto;
   text-align: center;
+  transform-style: preserve-3d;
 }
 .measure {
   max-width: 34rem;
@@ -174,7 +177,27 @@ body {
   animation: float-up var(--d, 14s) linear infinite;
   animation-delay: var(--delay, 0s);
   color: var(--rose);
+  transform-style: preserve-3d;
+  perspective: 900px;
 }
+.heart-3d {
+  transform-style: preserve-3d;
+  filter: drop-shadow(0 8px 8px rgba(50, 3, 20, 0.38)) drop-shadow(0 0 10px currentColor);
+  animation: heart-3d var(--heart-d, 5.5s) ease-in-out infinite;
+}
+@keyframes heart-3d {
+  0%, 100% { transform: rotateY(-18deg) rotateZ(-4deg) scale(0.94); }
+  50% { transform: rotateY(18deg) rotateZ(4deg) scale(1.08); }
+}
+@keyframes heart-beat-smooth {
+  0%, 100% { transform: scale(1) rotateZ(0deg); }
+  12% { transform: scale(1.08) rotateZ(-2deg); }
+  24% { transform: scale(0.98) rotateZ(2deg); }
+  36% { transform: scale(1.04) rotateZ(-1deg); }
+  52% { transform: scale(1) rotateZ(0deg); }
+}
+.animate-heartbeat { transform-origin: center; animation: heart-beat-smooth 3.8s ease-in-out infinite; }
+.stage-smooth { will-change: transform, opacity, filter; }
 
 @keyframes petal-fall {
   0% {
@@ -399,6 +422,49 @@ body {
   background: linear-gradient(90deg, transparent, var(--gold), transparent);
   opacity: 0.7;
 }
+.letter-paper {
+  overflow: visible;
+  border: 1px solid rgba(255, 179, 198, 0.48);
+  border-radius: 0.35rem 0.35rem 1.2rem 0.35rem;
+  color: #4b1c2a;
+  background:
+    linear-gradient(rgba(255, 247, 239, 0.94), rgba(255, 236, 225, 0.96)),
+    repeating-linear-gradient(0deg, rgba(157, 67, 80, 0.08) 0, rgba(157, 67, 80, 0.08) 1px, transparent 1px, transparent 2rem);
+  box-shadow: 0 0 0 7px rgba(255, 179, 198, 0.05), 0 22px 55px rgba(36, 11, 22, 0.42), inset 0 0 55px rgba(177, 87, 75, 0.12);
+  transform-style: preserve-3d;
+}
+.letter-paper::before {
+  content: "";
+  position: absolute;
+  inset: 0.65rem;
+  border: 1px solid rgba(161, 72, 82, 0.2);
+  pointer-events: none;
+}
+.letter-paper p { position: relative; z-index: 1; color: #542334; }
+.letter-paper p:first-of-type { color: #8b3f52; }
+.letter-paper p:last-of-type { color: #8b3f52; }
+.letter-seal {
+  position: absolute;
+  left: 50%;
+  top: -1.45rem;
+  z-index: 3;
+  display: grid;
+  height: 3.2rem;
+  width: 3.2rem;
+  place-items: center;
+  transform: translateX(-50%);
+  border-radius: 999px;
+  border: 3px solid #f7c873;
+  background: radial-gradient(circle at 35% 30%, #ff8ca4, #a3123a 65%, #5a1028);
+  color: #fff0f3;
+  font-size: 1.35rem;
+  box-shadow: 0 6px 16px rgba(90, 16, 40, 0.45), inset 0 0 0 2px rgba(255, 240, 243, 0.25);
+}
+.letter-corner { position: absolute; width: 4.5rem; height: 4.5rem; opacity: 0.42; pointer-events: none; }
+.letter-corner-left { left: 0; bottom: 0; border-left: 1px solid #a14b5b; border-bottom: 1px solid #a14b5b; border-radius: 0 0 0 1rem; }
+.letter-corner-right { right: 0; top: 0; border-right: 1px solid #a14b5b; border-top: 1px solid #a14b5b; border-radius: 0 1rem 0 0; }
+.letter-rule { display: inline-block; width: 4rem; height: 1px; background: linear-gradient(90deg, transparent, currentColor, transparent); }
+.letter-rule-dark { color: #a14b5b; opacity: 0.7; }
 
 /* Timeline horizontal snap */
 .snap-row {
@@ -425,7 +491,8 @@ body {
   }
   .glow-orb,
   .animate-breathe,
-  .animate-heartbeat {
+  .animate-heartbeat,
+  .heart-3d {
     animation: none !important;
   }
 }

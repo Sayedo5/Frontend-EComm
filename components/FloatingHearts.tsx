@@ -49,7 +49,7 @@ export default function FloatingHearts({ count = 14, slow = 1, color = "#FF4D6D"
             } as React.CSSProperties
           }
         >
-          <Heart className="h-full w-full" />
+          <Heart className="heart-3d h-full w-full" />
         </span>
       ))}
     </div>
