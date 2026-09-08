@@ -15,14 +15,13 @@ export const anniversaryConfig = {
   introChime: "/audio/intro-chime.mp3",
   // Add these eight files to /public/music using these exact names.
   musicTracks: {
-    // Existing file currently in the project; replace with opening.mp3 later if desired.
-    opening: "/music/our-song.mp3",
+    opening: "/music/opening.mp3",
     anniversaryMemories: "/music/anniversary-memories.mp3",
     loveLetter: "/music/love-letter.mp3",
     emotionalProposal: "/music/emotional-proposal.mp3",
-    nikahAcceptance: "/music/nikah-acceptance.mp3",
+    nikahAcceptance: "/music/nikah-acceptance-and-dua.mp3",
     ringCelebration: "/music/ring-celebration.mp3",
-    duaNikahPrayer: "/music/dua-nikah-prayer.mp3",
+    duaNikahPrayer: "/music/nikah-acceptance-and-dua.mp3",
     finalAnniversary: "/music/final-anniversary.mp3",
   },
   // true = play love.mp4 as the opening visual; false = native canvas particle heart
