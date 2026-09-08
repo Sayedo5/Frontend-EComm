@@ -2,7 +2,7 @@
  * One motion vocabulary for the whole site. Every screen pulls its easings, springs and
  * variants from here so entrances, exits and idle motion feel like one hand made them.
  */
-import type { Transition, Variants } from "framer-motion";
+import type { SpringOptions, Variants } from "framer-motion";
 
 /** Easing curves */
 export const ease = {
@@ -16,13 +16,13 @@ export const ease = {
 
 /** Spring presets */
 export const spring = {
-  soft: { type: "spring", stiffness: 120, damping: 18, mass: 0.9 } as Transition,
-  gentle: { type: "spring", stiffness: 180, damping: 22 } as Transition,
-  pop: { type: "spring", stiffness: 300, damping: 16 } as Transition,
-  snappy: { type: "spring", stiffness: 420, damping: 30 } as Transition,
+  soft: { type: "spring", stiffness: 120, damping: 18, mass: 0.9 },
+  gentle: { type: "spring", stiffness: 180, damping: 22 },
+  pop: { type: "spring", stiffness: 300, damping: 16 },
+  snappy: { type: "spring", stiffness: 420, damping: 30 },
   /** for things that follow the pointer */
-  follow: { type: "spring", stiffness: 60, damping: 18, mass: 1.2 } as Transition,
-};
+  follow: { type: "spring", stiffness: 60, damping: 18, mass: 1.2 },
+} satisfies Record<string, SpringOptions & { type: "spring" }>;
 
 /** Durations in seconds */
 export const dur = { fast: 0.35, base: 0.7, slow: 1.1, cinematic: 1.8 };
