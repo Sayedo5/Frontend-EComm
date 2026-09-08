@@ -22,6 +22,7 @@ export function MusicProvider({ children }: { children: React.ReactNode }) {
   const song = useRef<HTMLAudioElement | null>(null);
   const chime = useRef<HTMLAudioElement | null>(null);
   const currentTrack = useRef<TrackId>(stageMusic[stage] as TrackId);
+  const wantsPlayback = useRef(false);
   const [playing, setPlaying] = useState(false);
   const [track, setTrack] = useState<TrackId>(currentTrack.current);
 
@@ -86,16 +87,22 @@ export function MusicProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     const next = stageMusic[stage] as TrackId;
     if (next === currentTrack.current) return;
-    setTrackSource(next, playing);
-  }, [stage, playing, setTrackSource]);
+    setTrackSource(next, wantsPlayback.current);
+  }, [stage, setTrackSource]);
 
   const play = useCallback(() => {
+    wantsPlayback.current = true;
     playAudio();
   }, [playAudio]);
-  const pause = useCallback(() => song.current?.pause(), []);
+  const pause = useCallback(() => {
+    wantsPlayback.current = false;
+    song.current?.pause();
+    chime.current?.pause();
+  }, []);
   const toggle = useCallback(() => (song.current?.paused ? play() : pause()), [play, pause]);
 
   const startFromIntro = useCallback(() => {
+    wantsPlayback.current = true;
     setTrackSource("opening", false);
     const c = chime.current;
     if (!c) {
@@ -104,7 +111,7 @@ export function MusicProvider({ children }: { children: React.ReactNode }) {
     }
     let started = false;
     const startSong = () => {
-      if (started) return;
+      if (started || !wantsPlayback.current) return;
       started = true;
       play();
     };
