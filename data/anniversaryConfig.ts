@@ -15,7 +15,8 @@ export const anniversaryConfig = {
   introChime: "/audio/intro-chime.mp3",
   // Add these eight files to /public/music using these exact names.
   musicTracks: {
-    opening: "/music/opening.mp3",
+    // Existing file currently in the project; replace with opening.mp3 later if desired.
+    opening: "/music/our-song.mp3",
     anniversaryMemories: "/music/anniversary-memories.mp3",
     loveLetter: "/music/love-letter.mp3",
     emotionalProposal: "/music/emotional-proposal.mp3",
@@ -31,7 +32,8 @@ export const anniversaryConfig = {
 /** One track loops for its whole emotional chapter, then changes at the next chapter. */
 export const stageMusic = {
   intro: "opening",
-  hero: "opening",
+  // Opening is intentionally only the intro. The first message starts the next track.
+  hero: "anniversaryMemories",
   anniversaryCount: "anniversaryMemories",
   memories: "anniversaryMemories",
   loveLetter: "loveLetter",
