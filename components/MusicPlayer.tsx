@@ -3,20 +3,22 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { Music, Pause } from "lucide-react";
 import { music } from "@/data/loveMessages";
+import { musicTrackLabels } from "@/data/anniversaryConfig";
 import { useLang } from "@/lib/language";
 import { useMusic } from "@/lib/music";
 import { useNav } from "@/lib/nav";
 
 /**
- * Floating "Play our song 🎵" control. Hidden on the intro (the intro button starts the music).
- * Song file: /public/music/our-song.mp3 – swap freely.
+ * Floating chapter music control. Hidden on the intro (the intro button starts the music).
+ * The active track name is shown so each emotional chapter is easy to verify.
  */
 export default function MusicPlayer() {
-  const { playing, toggle } = useMusic();
+  const { playing, toggle, track } = useMusic();
   const { stage } = useNav();
   const { bt } = useLang();
   const visible = stage !== "intro";
   const label = bt(playing ? music.pause : music.play);
+  const trackLabel = musicTrackLabels[track];
 
   return (
     <AnimatePresence>
@@ -26,7 +28,7 @@ export default function MusicPlayer() {
           type="button"
           onClick={toggle}
           aria-pressed={playing}
-          aria-label={label.text}
+          aria-label={`${label.text} · ${trackLabel}`}
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0 }}
@@ -38,8 +40,8 @@ export default function MusicPlayer() {
             {playing ? <Pause className="h-4 w-4" /> : <Music className="h-4 w-4" />}
             {playing && <span className="absolute inset-0 animate-ping rounded-full bg-gold/30" />}
           </span>
-          <span className={`hidden sm:inline ${label.urdu ? "font-urdu" : ""}`} lang={label.lang} dir={label.urdu ? "rtl" : "ltr"}>
-            {label.text}
+          <span className="hidden sm:inline" lang="en" dir="ltr">
+            {label.text} · {trackLabel}
           </span>
           <span className="sm:hidden">{playing ? "Pause" : "Play"}</span>
         </motion.button>
