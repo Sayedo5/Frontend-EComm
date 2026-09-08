@@ -68,14 +68,14 @@ export function MusicProvider({ children }: { children: React.ReactNode }) {
     c.preload = "auto";
     c.volume = 0.9;
     chime.current = c;
-    const onPlay = () => setPlaying(true);
+    const onPlaying = () => setPlaying(true);
     const onPause = () => setPlaying(false);
     const onError = () => setPlaying(false);
-    s.addEventListener("play", onPlay);
+    s.addEventListener("playing", onPlaying);
     s.addEventListener("pause", onPause);
     s.addEventListener("error", onError);
     return () => {
-      s.removeEventListener("play", onPlay);
+      s.removeEventListener("playing", onPlaying);
       s.removeEventListener("pause", onPause);
       s.removeEventListener("error", onError);
       s.pause();
@@ -103,22 +103,14 @@ export function MusicProvider({ children }: { children: React.ReactNode }) {
 
   const startFromIntro = useCallback(() => {
     wantsPlayback.current = true;
-    setTrackSource("opening", false);
+    // Start immediately from the user's click so later chapter changes retain autoplay permission.
+    setTrackSource("opening", true);
     const c = chime.current;
-    if (!c) {
-      play();
-      return;
+    if (c) {
+      c.currentTime = 0;
+      c.play().catch(() => {});
     }
-    let started = false;
-    const startSong = () => {
-      if (started || !wantsPlayback.current) return;
-      started = true;
-      play();
-    };
-    c.currentTime = 0;
-    c.addEventListener("ended", startSong, { once: true });
-    c.play().then(() => setTimeout(startSong, 2600)).catch(startSong);
-  }, [play, setTrackSource]);
+  }, [setTrackSource]);
 
   const value = useMemo(() => ({ playing, track, startFromIntro, toggle, play, pause }), [playing, track, startFromIntro, toggle, play, pause]);
   return <MusicContext.Provider value={value}>{children}</MusicContext.Provider>;
