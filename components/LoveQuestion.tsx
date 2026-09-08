@@ -13,13 +13,13 @@ import StageWrap from "./ui/StageWrap";
 /** 5.6 – "Do you love me?" Near-black, one spotlight, the particle heart is the only visual. */
 export default function LoveQuestion() {
   const { go } = useNav();
-  const { t } = useLang();
+  const { bt } = useLang();
   const lines = useLines();
   const [asked, setAsked] = useState(false);
 
   const items = lines(loveQuestion.lines, "en", (i) => ({ hold: i === loveQuestion.lines.length - 1 ? 2600 : 2200, className: "text-2xl sm:text-4xl text-warmwhite/90" }));
-  const yes = t(loveQuestion.yes);
-  const no = t(loveQuestion.no);
+  const yes = bt(loveQuestion.yes);
+  const no = bt(loveQuestion.no);
 
   return (
     <StageWrap mood="spotlight">

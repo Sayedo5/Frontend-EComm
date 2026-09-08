@@ -15,14 +15,14 @@ import StageWrap from "./ui/StageWrap";
 /** 5.7a – YES. Heart expands, petals bloom, warm light. */
 export default function YesLoveResponse() {
   const { go } = useNav();
-  const { t } = useLang();
+  const { bt } = useLang();
   const lines = useLines();
   const [phase, setPhase] = useState<"lines" | "more">("lines");
   const [linesDone, setLinesDone] = useState(false);
 
   const items = lines(yesPath.lines, "en", (i) => ({ hold: i === yesPath.lines.length - 1 ? 2200 : 2800, className: "text-2xl sm:text-3xl text-warmwhite" }));
-  const tellMore = t(yesPath.tellMore);
-  const keepGoing = t(yesPath.keepGoing);
+  const tellMore = bt(yesPath.tellMore);
+  const keepGoing = bt(yesPath.keepGoing);
 
   return (
     <StageWrap

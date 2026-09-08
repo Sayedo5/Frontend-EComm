@@ -11,7 +11,7 @@ import StageWrap from "./ui/StageWrap";
 /** 5.3 – The letter. Candlelight: warm amber pooling from one side, almost still. */
 export default function LoveLetter() {
   const { go } = useNav();
-  const { t, resolve } = useLang();
+  const { t, bt, resolve } = useLang();
   const [shown, setShown] = useState(1);
   const endRef = useRef<HTMLDivElement>(null);
   const total = letter.paragraphs.length;
@@ -22,8 +22,8 @@ export default function LoveLetter() {
     if (shown > 1) endRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
   }, [shown]);
 
-  const keep = t(letter.keepReading);
-  const button = t(letter.button);
+  const keep = bt(letter.keepReading);
+  const button = bt(letter.button);
 
   return (
     <StageWrap

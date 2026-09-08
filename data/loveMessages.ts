@@ -83,8 +83,8 @@ export const youAre = {
 };
 
 export const timeline = {
-  heading: bi("Four years, one line", "چار سال، ایک لکیر"),
-  sub: bi("Every year, one more reason.", "ہر سال، ایک اور وجہ۔"),
+  heading: bi("Our love, year by year", "ہماری محبت، سال بہ سال"),
+  sub: bi("Tap each year and feel the moment it gave my heart.", "ہر سال کو چھو کر وہ احساس محسوس کرو جو اس نے میرے دل کو دیا۔"),
   gallery: bi("A few little symbols from our story", "ہماری کہانی کے چند خوبصورت نشان"),
   button: bi("Okay. One question. ❤️", "اچھا۔ ایک سوال۔ ❤️"),
 };

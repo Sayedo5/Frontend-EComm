@@ -14,9 +14,9 @@ import { useNav } from "@/lib/nav";
 export default function MusicPlayer() {
   const { playing, toggle } = useMusic();
   const { stage } = useNav();
-  const { t } = useLang();
+  const { bt } = useLang();
   const visible = stage !== "intro";
-  const label = t(playing ? music.pause : music.play);
+  const label = bt(playing ? music.pause : music.play);
 
   return (
     <AnimatePresence>

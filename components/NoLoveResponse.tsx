@@ -17,13 +17,13 @@ import StageWrap from "./ui/StageWrap";
  */
 export default function NoLoveResponse() {
   const { go } = useNav();
-  const { t, resolve } = useLang();
+  const { t, bt, resolve } = useLang();
   const lines = useLines();
   const [phase, setPhase] = useState<"lines" | "letter">("lines");
   const urdu = resolve("en") === "ur";
 
   const items = lines(noPath.lines, "en", (i) => ({ hold: i === 0 ? 1800 : 3000, className: "text-2xl sm:text-3xl text-warmwhite/95" }));
-  const button = t(noPath.button);
+  const button = bt(noPath.button);
 
   return (
     <StageWrap mood="spotlight" ambient={<FloatingHearts count={6} slow={2.4} opacity={0.22} seed={41} />}>

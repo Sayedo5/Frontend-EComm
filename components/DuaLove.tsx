@@ -61,8 +61,8 @@ export default function DuaLove() {
       </div>
 
       <div className="mt-10" dir="ltr">
-        <StageButton onClick={() => go("nikahEnding")} variant="gold" delay={2 + duaLove.expressions.length * 2.4} urdu>
-          {duaLove.button.ur}
+        <StageButton onClick={() => go("nikahEnding")} variant="gold" delay={2 + duaLove.expressions.length * 2.4}>
+          Ameen ❤️
         </StageButton>
       </div>
     </StageWrap>

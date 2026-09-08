@@ -13,9 +13,9 @@ import StageWrap from "./ui/StageWrap";
 /** 5.10 – Urdu love section. Rose-gold with soft bokeh, RTL, slower petals. */
 export default function UrduLove() {
   const { go } = useNav();
-  const { t, resolve, mode } = useLang();
+  const { t, bt, resolve, mode } = useLang();
   const urdu = resolve("ur") === "ur";
-  const button = t(urduSection.button, "ur");
+  const button = bt(urduSection.button);
 
   return (
     <StageWrap

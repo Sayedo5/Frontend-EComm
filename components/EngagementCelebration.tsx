@@ -17,7 +17,7 @@ import StageWrap from "./ui/StageWrap";
 /** Section 7 – Engagement celebration. Golden, slightly brighter; the particle heart bursts, then settles. */
 export default function EngagementCelebration() {
   const { go } = useNav();
-  const { t } = useLang();
+  const { bt } = useLang();
   const lines = useLines();
   const [done, setDone] = useState(false);
   const [burst, setBurst] = useState(true);
@@ -31,7 +31,7 @@ export default function EngagementCelebration() {
     hold: 2600,
     className: i === 0 ? "text-4xl sm:text-6xl gold-text font-semibold" : "text-2xl sm:text-4xl text-warmwhite",
   }));
-  const button = t(celebration.button);
+  const button = bt(celebration.button);
 
   return (
     <StageWrap

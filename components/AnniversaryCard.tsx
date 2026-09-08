@@ -63,10 +63,10 @@ function TiltCard({ children }: { children: ReactNode }) {
  */
 export default function AnniversaryCard() {
   const { go } = useNav();
-  const { t, mode } = useLang();
+  const { t, bt, mode } = useLang();
   const reduce = useReducedMotion();
   const [face, setFace] = useState<Face>("front");
-  const next = t(card.next);
+  const next = bt(card.next);
   const hint = card.openHint;
   const showRoman = mode !== "ur";
 

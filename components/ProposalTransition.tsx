@@ -18,7 +18,7 @@ import StageWrap from "./ui/StageWrap";
  */
 export default function ProposalTransition() {
   const { stage, go } = useNav();
-  const { t } = useLang();
+  const { t, bt } = useLang();
   const lines = useLines();
   const [thinking, setThinking] = useState(false);
   const [thinkDone, setThinkDone] = useState(false);
@@ -29,9 +29,9 @@ export default function ProposalTransition() {
     className: i === proposal.lines.length - 1 ? "text-3xl sm:text-5xl text-gold" : "text-2xl sm:text-4xl text-warmwhite/90",
   }));
   const thinkLines = lines(proposal.thinkLines, "en", () => ({ hold: 3200, className: "text-2xl sm:text-3xl text-warmwhite/95" }));
-  const yes = t(proposal.yes);
-  const think = t(proposal.think);
-  const ready = t(proposal.ready);
+  const yes = bt(proposal.yes);
+  const think = bt(proposal.think);
+  const ready = bt(proposal.ready);
 
   return (
     <StageWrap mood="starlit" ambient={<Sparkles kind="star" count={24} seed={61} slow={1.1} />}>

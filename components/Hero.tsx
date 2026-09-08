@@ -15,7 +15,7 @@ import StageWrap from "./ui/StageWrap";
 /** 5.1 – Date reveal. One line replaces the last; a faint particle heart breathes behind. */
 export default function Hero() {
   const { go } = useNav();
-  const { t } = useLang();
+  const { bt } = useLang();
   const lines = useLines();
   const [done, setDone] = useState(false);
 
@@ -28,7 +28,7 @@ export default function Hero() {
           ? "text-4xl sm:text-6xl gold-text font-semibold"
           : "text-3xl sm:text-5xl text-warmwhite",
   }));
-  const button = t(hero.button);
+  const button = bt(hero.button);
 
   return (
     <StageWrap

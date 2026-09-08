@@ -132,7 +132,7 @@ function Tile({ value, label, delay, big }: { value: number; label: Bi; delay: n
 /** 5.2 – Anniversary counter. Running totals of years, months, days, hours, minutes and seconds, live to the second. */
 export default function AnniversaryIntro() {
   const { go } = useNav();
-  const { t } = useLang();
+  const { t, bt } = useLang();
   const [step, setStep] = useState(0);
   const [now, setNow] = useState<Date | null>(null);
 
@@ -159,7 +159,7 @@ export default function AnniversaryIntro() {
   const seconds = useIntroCount(live.seconds, step >= 3, 2400);
 
   const title = t(counter.title);
-  const button = t(counter.button);
+  const button = bt(counter.button);
   const pad = (n: number) => String(n).padStart(2, "0");
 
   return (

@@ -28,7 +28,7 @@ const SEQ_DELAYS = [0, 2600, 1200, 700, 700, 900];
 
 export default function QaboolExperience() {
   const { stage, go } = useNav();
-  const { t } = useLang();
+  const { t, bt } = useLang();
   const lines = useLines();
   const reduce = useReducedMotion();
   const stepIndex = stage === "qabool1" ? 1 : stage === "qabool2" ? 2 : stage === "qabool3" ? 3 : 4;
@@ -60,7 +60,7 @@ export default function QaboolExperience() {
 
   const data = stepIndex === 1 ? qabool.one : stepIndex === 2 ? qabool.two : qabool.three;
   const ask = t(data.ask, "ur");
-  const button = t(data.button, "ur");
+  const button = bt(data.button);
   const leadLines = lines(data.lines, stepIndex === 1 ? "en" : "ur", (i, urdu) => ({
     hold: 2000,
     className: stepIndex === 1 && i === data.lines.length - 1 ? "text-4xl sm:text-5xl gold-text font-semibold" : `${urdu ? "text-3xl sm:text-4xl" : "text-2xl sm:text-4xl"} text-warmwhite/90`,

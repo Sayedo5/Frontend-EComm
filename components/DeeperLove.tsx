@@ -14,7 +14,7 @@ import StageWrap from "./ui/StageWrap";
 /** 5.8 – Three quick interactive beats. Both paths land here. */
 export default function DeeperLove() {
   const { go } = useNav();
-  const { t } = useLang();
+  const { t, bt } = useLang();
   const [q, setQ] = useState(0);
   const [reply, setReply] = useState<Bi | null>(null);
   const current = deeperLove[q];
@@ -61,7 +61,7 @@ export default function DeeperLove() {
             {reply === null ? (
               <div className="flex w-full max-w-sm flex-col gap-4 sm:flex-row sm:justify-center">
                 {current.options.map((o, i) => {
-                  const label = t(o.label);
+                  const label = bt(o.label);
                   return (
                     <StageButton key={i} onClick={() => setReply(o.reply)} variant={i === 0 ? "primary" : "soft"} delay={0.5 + i * 0.2} className="w-full sm:w-auto sm:min-w-[12rem]" urdu={label.urdu}>
                       {label.text}

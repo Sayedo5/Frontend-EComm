@@ -17,6 +17,8 @@ type LangValue = {
   resolve: (primary: Lang) => Lang;
   /** Resolve one bilingual string. */
   t: (bi: Bi, primary?: Lang) => { text: string; urdu: boolean; lang: Lang };
+  /** Action labels stay in English in every language mode. */
+  bt: (bi: Bi) => { text: string; urdu: false; lang: "en" };
 };
 
 const LanguageContext = createContext<LangValue | null>(null);
@@ -57,7 +59,9 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     [resolve],
   );
 
-  const value = useMemo(() => ({ mode, setMode, cycle, resolve, t }), [mode, setMode, cycle, resolve, t]);
+  const bt = useCallback((bi: Bi) => ({ text: bi.en, urdu: false as const, lang: "en" as const }), []);
+
+  const value = useMemo(() => ({ mode, setMode, cycle, resolve, t, bt }), [mode, setMode, cycle, resolve, t, bt]);
   return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>;
 }
 

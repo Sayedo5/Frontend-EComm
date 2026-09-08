@@ -16,7 +16,7 @@ const tilt = [-4, 3, -2, 5, -5, 2, -3, 4, -1, 3];
 /** 5.4 – "You are..." Blush-rose, playful staggered word pop-ins, floating petals. */
 export default function CuteGirlSection() {
   const { go } = useNav();
-  const { t } = useLang();
+  const { t, bt } = useLang();
   const reduce = useReducedMotion();
   const [shown, setShown] = useState(0);
   const [closing, setClosing] = useState(0);
@@ -33,7 +33,7 @@ export default function CuteGirlSection() {
     return () => [t1, t2, t3].forEach(clearTimeout);
   }, [shown, total]);
 
-  const button = t(youAre.button);
+  const button = bt(youAre.button);
 
   return (
     <StageWrap

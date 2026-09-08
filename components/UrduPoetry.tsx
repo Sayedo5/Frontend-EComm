@@ -13,9 +13,9 @@ import StageWrap from "./ui/StageWrap";
 /** 5.11 – Original Urdu poetry. Three cards, gold left border, generous spacing, rose-gold bokeh. */
 export default function UrduPoetry() {
   const { go } = useNav();
-  const { t, resolve } = useLang();
+  const { t, bt, resolve } = useLang();
   const urdu = resolve("ur") === "ur";
-  const button = t(urduSection.poetryButton);
+  const button = bt(urduSection.poetryButton);
 
   return (
     <StageWrap
