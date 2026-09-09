@@ -36,6 +36,9 @@ export default function NoLoveResponse() {
           <LineSequence lines={items} startDelay={1200} onDone={() => setPhase("letter")} className="min-h-[7rem]" />
         ) : (
           <>
+            <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8 }} className="rounded-full border border-blush/20 bg-blush/10 px-4 py-1 text-2xl shadow-[0_0_24px_rgba(255,179,198,0.18)]" aria-label="A tender, sad moment">
+              🥺💗🫶
+            </motion.div>
             <div className={`measure flex flex-col gap-5 ${urdu ? "text-right" : "text-left"}`}>
               {noPath.paragraphs.map((p, i) => (
                 <motion.div key={i} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.1, delay: i * 1.4 }}>

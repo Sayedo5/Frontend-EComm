@@ -98,7 +98,8 @@ export default function ParticleHeart({ size = "medium", density = "medium", int
     let scale = 1;
     let cx = 0;
     let cy = 0;
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    // Keep the cinematic particle heart crisp without doubling the canvas cost on mobile.
+    const dpr = Math.min(window.devicePixelRatio || 1, window.innerWidth < 700 ? 1.25 : 1.5);
     let seed = 12345;
     const rand = () => {
       seed = (seed * 16807) % 2147483647;

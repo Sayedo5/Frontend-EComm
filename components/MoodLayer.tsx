@@ -44,12 +44,12 @@ export default function MoodLayer() {
           ].map((heart, i) => (
             <motion.div
               key={`${mood}-${i}`}
-              className="absolute heart-3d"
+              className="absolute"
               style={{ left: heart.left, top: heart.top, width: heart.size, height: heart.size, color: heart.color }}
               animate={{ y: [0, -18, 0], x: [0, i % 2 ? 10 : -8, 0], rotate: [-8, 8, -8], scale: [0.88, 1.08, 0.88] }}
               transition={{ duration: 8 + i * 1.5, delay: heart.delay, repeat: Infinity, ease: "easeInOut" }}
             >
-              <Heart className="h-full w-full" />
+              <Heart className="heart-3d h-full w-full" />
             </motion.div>
           ))}
         </div>

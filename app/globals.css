@@ -150,6 +150,7 @@ body {
   overflow: hidden;
   pointer-events: none;
   z-index: 1;
+  contain: layout paint;
 }
 .ambient > * {
   position: absolute;
@@ -182,7 +183,7 @@ body {
 }
 .heart-3d {
   transform-style: preserve-3d;
-  filter: drop-shadow(0 8px 8px rgba(50, 3, 20, 0.38)) drop-shadow(0 0 10px currentColor);
+  filter: drop-shadow(0 0 5px currentColor);
   animation: heart-3d var(--heart-d, 5.5s) ease-in-out infinite;
 }
 @keyframes heart-3d {
@@ -197,7 +198,7 @@ body {
   52% { transform: scale(1) rotateZ(0deg); }
 }
 .animate-heartbeat { transform-origin: center; animation: heart-beat-smooth 3.8s ease-in-out infinite; }
-.stage-smooth { will-change: transform, opacity, filter; }
+.stage-smooth { will-change: transform, opacity; }
 
 @keyframes petal-fall {
   0% {
