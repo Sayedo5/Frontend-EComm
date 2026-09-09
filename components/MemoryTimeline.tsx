@@ -1,7 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { memories } from "@/data/memories";
 import { timeline, ui } from "@/data/loveMessages";
 import { L, useLang } from "@/lib/language";
@@ -16,8 +16,10 @@ export default function MemoryTimeline() {
   const { bt } = useLang();
   const reduce = useReducedMotion();
   const [selected, setSelected] = useState<number | null>(null);
+  const touchHandled = useRef(false);
   const button = bt(timeline.button);
   const active = selected === null ? null : memories[selected];
+  const openMemory = (index: number) => setSelected((current) => (current === index ? null : index));
 
   return (
     <StageWrap mood="dusk" className="!justify-start" ambient={<Sparkles kind="star" count={24} seed={9} slow={1.2} />} contentClassName="!max-w-4xl">
@@ -39,7 +41,22 @@ export default function MemoryTimeline() {
                 <motion.button
                   type="button"
                   aria-expanded={isActive}
-                  onClick={() => setSelected(isActive ? null : i)}
+                  onPointerUp={(event) => {
+                    if (event.pointerType === "touch") {
+                      touchHandled.current = true;
+                      openMemory(i);
+                      window.setTimeout(() => { touchHandled.current = false; }, 500);
+                    }
+                  }}
+                  onClick={() => {
+                    if (!touchHandled.current) openMemory(i);
+                  }}
+                  onKeyDown={(event) => {
+                    if (event.key === "Enter" || event.key === " ") {
+                      event.preventDefault();
+                      openMemory(i);
+                    }
+                  }}
                   whileHover={reduce ? undefined : { y: -10, rotateX: 5, scale: 1.03 }}
                   whileTap={{ scale: 0.97 }}
                   aria-label={`${isActive ? "Close" : "Open"} ${m.year} memory`}
