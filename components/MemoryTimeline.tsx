@@ -29,6 +29,7 @@ export default function MemoryTimeline() {
       </motion.div>
 
       <div className="relative mt-10 w-full [perspective:1400px]">
+        <p className="mb-4 text-sm font-semibold tracking-wide text-gold/85 sm:text-base">Tap a year to open its feeling ✦</p>
         <motion.div className="rule-gold absolute left-4 right-4 top-1/2 z-0 hidden sm:block" initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ duration: 1.6, delay: 0.5 }} />
         <ol className="relative z-10 grid gap-5 sm:grid-cols-5" aria-label="Interactive memories by year">
           {memories.map((m, i) => {
@@ -41,7 +42,8 @@ export default function MemoryTimeline() {
                   onClick={() => setSelected(isActive ? null : i)}
                   whileHover={reduce ? undefined : { y: -10, rotateX: 5, scale: 1.03 }}
                   whileTap={{ scale: 0.97 }}
-                  className={`group relative w-full overflow-hidden rounded-[1.75rem] border text-left shadow-[0_25px_60px_-28px_rgba(0,0,0,0.95)] transition-colors ${isActive ? "border-gold/80 bg-white/[0.12]" : "border-gold/20 bg-white/[0.045] hover:border-blush/60"}`}
+                  aria-label={`${isActive ? "Close" : "Open"} ${m.year} memory`}
+                  className={`group relative w-full cursor-pointer touch-manipulation overflow-hidden rounded-[1.75rem] border text-left shadow-[0_25px_60px_-28px_rgba(0,0,0,0.95)] transition-colors ${isActive ? "border-gold/80 bg-white/[0.12]" : "border-gold/20 bg-white/[0.045] hover:border-blush/60"}`}
                   style={{ transformStyle: "preserve-3d" }}
                 >
                   <div className={`relative flex h-44 items-center justify-center overflow-hidden bg-gradient-to-br ${m.tone}`}>
@@ -50,7 +52,7 @@ export default function MemoryTimeline() {
                     <span className="memory-orbit memory-orbit-delayed absolute h-36 w-36 rounded-full border border-blush/25" />
                     <span className="absolute inset-0 bg-[radial-gradient(circle_at_50%_45%,rgba(255,255,255,0.24),transparent_30%,rgba(12,3,10,0.35)_78%)]" />
                     <span className="absolute bottom-3 left-4 rounded-full border border-gold/35 bg-maroon-deepest/60 px-3 py-1 text-xs tracking-[0.3em] text-gold">{m.year}</span>
-                    <span className="absolute right-4 top-3 text-xs text-blush/70">{isActive ? "Close" : "Open"}</span>
+                    <span className="absolute right-3 top-3 rounded-full border border-blush/35 bg-maroon-deepest/55 px-2.5 py-1 text-[0.65rem] font-semibold tracking-wide text-blush">{isActive ? "Tap to close" : "Tap to open"}</span>
                   </div>
                   <div className="p-4">
                     <L t={m.title} as="h3" className="display text-xl font-semibold text-warmwhite" urduClassName="text-right" />

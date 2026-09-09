@@ -3,7 +3,6 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { Music, Pause } from "lucide-react";
 import { music } from "@/data/loveMessages";
-import { musicTrackLabels } from "@/data/anniversaryConfig";
 import { useLang } from "@/lib/language";
 import { useMusic } from "@/lib/music";
 import { useNav } from "@/lib/nav";
@@ -13,12 +12,11 @@ import { useNav } from "@/lib/nav";
  * The active track name is shown so each emotional chapter is easy to verify.
  */
 export default function MusicPlayer() {
-  const { playing, toggle, track } = useMusic();
+  const { playing, toggle } = useMusic();
   const { stage } = useNav();
   const { bt } = useLang();
   const visible = stage !== "intro";
   const label = bt(playing ? music.pause : music.play);
-  const trackLabel = musicTrackLabels[track];
 
   return (
     <AnimatePresence>
@@ -28,7 +26,7 @@ export default function MusicPlayer() {
           type="button"
           onClick={toggle}
           aria-pressed={playing}
-          aria-label={`${label.text} · ${trackLabel}`}
+          aria-label={`${label.text} music`}
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0 }}
@@ -41,9 +39,9 @@ export default function MusicPlayer() {
             {playing && <span className="absolute inset-0 animate-ping rounded-full bg-gold/30" />}
           </span>
           <span className="hidden sm:inline" lang="en" dir="ltr">
-            {label.text} · {trackLabel}
+            {label.text}
           </span>
-          <span className="sm:hidden">{label.text} · {trackLabel}</span>
+          <span className="sm:hidden">{label.text}</span>
         </motion.button>
       )}
     </AnimatePresence>
