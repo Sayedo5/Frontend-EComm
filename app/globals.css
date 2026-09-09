@@ -124,7 +124,9 @@ body {
   align-items: center;
   justify-content: center;
   padding: calc(4.25rem + var(--sat)) 1.25rem calc(2rem + var(--sab));
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   isolation: isolate;
   transform-style: preserve-3d;
   backface-visibility: hidden;
