@@ -1,6 +1,6 @@
 "use client";
 
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { useRef, useState } from "react";
 import { memories } from "@/data/memories";
 import { timeline, ui } from "@/data/loveMessages";
@@ -18,7 +18,6 @@ export default function MemoryTimeline() {
   const [selected, setSelected] = useState<number | null>(null);
   const touchHandled = useRef(false);
   const button = bt(timeline.button);
-  const active = selected === null ? null : memories[selected];
   const openMemory = (index: number) => setSelected((current) => (current === index ? null : index));
 
   return (
@@ -76,26 +75,24 @@ export default function MemoryTimeline() {
                     <L t={m.caption} as="p" className="mt-2 line-clamp-2 text-base leading-snug text-blush/90" enClassName="italic" urduClassName="text-right" />
                   </div>
                 </motion.button>
+                {isActive && (
+                  <motion.section
+                    initial={{ opacity: 0, height: 0, y: -8 }}
+                    animate={{ opacity: 1, height: "auto", y: 0 }}
+                    exit={{ opacity: 0, height: 0, y: -8 }}
+                    transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+                    className={`relative mt-3 overflow-hidden rounded-[1.5rem] border border-gold/35 bg-gradient-to-br ${m.tone} p-5 text-center shadow-[0_22px_55px_-28px_rgba(255,77,109,0.5)]`}
+                  >
+                    <motion.div animate={reduce ? undefined : { y: [0, -6, 0], scale: [1, 1.1, 1], rotate: [-5, 5, -5] }} transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut" }} className="text-4xl text-blush">{m.symbol}</motion.div>
+                    <div className="mt-2 text-[0.65rem] tracking-[0.32em] text-gold">{m.year} · A PIECE OF US</div>
+                    <L t={m.caption} as="p" className="mt-3 text-base leading-relaxed text-blush" enClassName="italic" urduClassName="text-right" />
+                  </motion.section>
+                )}
               </motion.li>
             );
           })}
         </ol>
       </div>
-
-      <AnimatePresence mode="wait">
-        {active && (
-          <motion.section key={active.year} initial={{ opacity: 0, y: 18, scale: 0.96 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: -12 }} transition={{ duration: 0.55 }} className={`relative mt-7 w-full overflow-hidden rounded-[2rem] border border-gold/35 bg-gradient-to-br ${active.tone} p-6 text-center shadow-[0_28px_80px_-30px_rgba(255,77,109,0.55)] sm:p-8`}>
-            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(255,255,255,0.18),transparent_45%)]" />
-            <div className="relative">
-              <motion.div className="text-5xl text-blush drop-shadow-[0_0_18px_rgba(255,77,109,0.8)]" animate={reduce ? undefined : { y: [0, -8, 0], scale: [1, 1.12, 1], rotate: [-5, 5, -5] }} transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut" }}>{active.symbol}</motion.div>
-              <div className="mt-2 text-xs tracking-[0.4em] text-gold">{active.year} · A PIECE OF US</div>
-              <L t={active.title} as="h3" className="display mt-3 text-2xl font-semibold text-warmwhite sm:text-3xl" urduClassName="text-right" />
-              <L t={active.caption} as="p" className="mx-auto mt-3 max-w-2xl text-lg leading-relaxed text-blush sm:text-xl" enClassName="italic" urduClassName="text-right" />
-              <p className="mt-4 text-sm tracking-wide text-warmwhite/60">Tap another year to open its feeling.</p>
-            </div>
-          </motion.section>
-        )}
-      </AnimatePresence>
 
       <L t={ui.swipe} as="p" className="mt-4 text-xs tracking-widest text-blush/50 sm:hidden" />
       <div className="mt-8 pb-6">
