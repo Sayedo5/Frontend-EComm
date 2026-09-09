@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { memories } from "@/data/memories";
 import { timeline, ui } from "@/data/loveMessages";
 import { L, useLang } from "@/lib/language";
@@ -17,8 +17,17 @@ export default function MemoryTimeline() {
   const reduce = useReducedMotion();
   const [selected, setSelected] = useState<number | null>(null);
   const touchHandled = useRef(false);
+  const activeCardRef = useRef<HTMLLIElement>(null);
   const button = bt(timeline.button);
   const openMemory = (index: number) => setSelected((current) => (current === index ? null : index));
+
+  useEffect(() => {
+    if (selected === null) return;
+    const frame = window.requestAnimationFrame(() => {
+      activeCardRef.current?.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
+    });
+    return () => window.cancelAnimationFrame(frame);
+  }, [selected]);
 
   return (
     <StageWrap mood="dusk" className="!justify-start" ambient={<Sparkles kind="star" count={24} seed={9} slow={1.2} />} contentClassName="!max-w-4xl">
@@ -36,7 +45,7 @@ export default function MemoryTimeline() {
           {memories.map((m, i) => {
             const isActive = selected === i;
             return (
-              <motion.li key={m.year} initial={reduce ? { opacity: 0 } : { opacity: 0, y: 26, rotateY: -18 }} animate={{ opacity: 1, y: 0, rotateY: isActive ? 0 : i % 2 ? 2 : -2 }} transition={{ duration: 0.8, delay: 0.5 + i * 0.16 }}>
+              <motion.li ref={isActive ? activeCardRef : undefined} key={m.year} initial={reduce ? { opacity: 0 } : { opacity: 0, y: 26, rotateY: -18 }} animate={{ opacity: 1, y: 0, rotateY: isActive ? 0 : i % 2 ? 2 : -2 }} transition={{ duration: 0.8, delay: 0.5 + i * 0.16 }} className="scroll-mt-24">
                 <motion.button
                   type="button"
                   aria-expanded={isActive}
